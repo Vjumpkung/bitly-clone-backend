@@ -4,14 +4,14 @@
 
 ## Endpoints list
 
-create shortUrl (https://bitly-clone-backend/url/)
+create shortUrl (https://bitly-clone-backend.onrender.com/url/)
 - method : POST
 - require body : `{"url" : "https://domain.tld/"}`
 
 get full url
 - method : GET
 - require PATH : shorturl
-- example https://bitly-clone-backend/url/vcXkw/
+- example https://bitly-clone-backend.onrender.com/url/vcXkw/
 
 ## setup your own server
 - clone repo!!!
