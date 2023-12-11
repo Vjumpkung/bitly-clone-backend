@@ -1,20 +1,21 @@
 name: Deploy Backend
 
 on:
-  push: 
+  push:
     branches:
       - master
 
 jobs:
   deploy:
-    runs-on: "vjumpkung"
+    runs-on: 'vjumpkung'
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: 20.x
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build
-    - run: npm run restart:pm2
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+      - run: echo MONGO_URI=${{ secrets.MONGO_URI }} >> .env && echo MONGO_DB_NAME=${{ secrets.MONGO_DB_NAME }} >> .env
+      - run: npm run restart:pm2
