@@ -18,7 +18,7 @@ export class UrlService {
         { length: numOfChars },
         () => chars[Math.floor(Math.random() * chars.length)],
       ).join('');
-      if ((await this.urlModel.findOne({ shorturl: ans })) === null) {
+      if ((await this.urlModel.findOne({ shorturl: ans }).exec()) === null) {
         return ans;
       }
     }
@@ -32,6 +32,6 @@ export class UrlService {
   }
 
   async getUrl(shorturl: string) {
-    return this.urlModel.findOne({ shorturl }, { url: 1, _id: 0 }).exec();
+    return await this.urlModel.findOne({ shorturl }, { url: 1, _id: 0 }).exec();
   }
 }
