@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { urlSchema } from 'src/schema/url.schema';
@@ -32,6 +32,14 @@ export class UrlService {
   }
 
   async getUrl(shorturl: string) {
-    return await this.urlModel.findOne({ shorturl }, { url: 1, _id: 0 }).exec();
+    const res = await this.urlModel
+      .findOne({ shorturl }, { url: 1, _id: 0 })
+      .exec();
+
+    if (res === null) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    return res;
   }
 }
