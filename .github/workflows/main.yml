@@ -18,5 +18,4 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run build
-      - run: echo MONGO_URI=${{ secrets.MONGO_URI }} >> .env && echo MONGO_DB_NAME=${{ secrets.MONGO_DB_NAME }} >> .env
       - run: npm run restart:pm2
